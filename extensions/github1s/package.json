@@ -1,0 +1,157 @@
+{
+  "name": "github1s",
+  "version": "0.0.0",
+  "publisher": "github1s",
+  "description": "",
+  "private": true,
+  "enableProposedApi": true,
+  "directories": {
+    "lib": "lib"
+  },
+  "activationEvents": [
+    "onFileSystem:github1s",
+    "onCommand:github1s.validate-token",
+    "onCommand:github1s.update-token",
+    "onCommand:github1s.clear-token",
+    "onCommand:github1s.get-current-authority",
+    "onCommand:github1s.checkout-ref",
+    "onCommand:github1s.switch-to-pull",
+    "onView:github1s"
+  ],
+  "browser": "./dist/extension",
+  "engines": {
+    "vscode": "^1.48.0"
+  },
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "github1s",
+          "title": "GitHub1s",
+          "icon": "assets/github1s.svg"
+        }
+      ]
+    },
+    "views": {
+      "github1s": [
+        {
+          "id": "github1s.views.settings",
+          "name": "Settings",
+          "type": "webview"
+        }
+      ],
+      "scm": [
+        {
+          "id": "github1s.views.pull-request-list",
+          "name": "Pull Requests"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "github1s.update-token",
+        "title": "Update GitHub OAuth Token",
+        "category": "GitHub1s"
+      },
+      {
+        "command": "github1s.validate-token",
+        "title": "Validate Current GitHub OAuth Token",
+        "category": "GitHub1s"
+      },
+      {
+        "command": "github1s.clear-token",
+        "title": "Clear Current GitHub OAuth Token",
+        "category": "GitHub1s"
+      },
+      {
+        "command": "github1s.checkout-ref",
+        "title": "Checkout to...",
+        "category": "GitHub1s"
+      },
+      {
+        "command": "github1s.switch-to-pull",
+        "title": "Search a Pull Request",
+        "category": "GitHub1s",
+        "icon": "$(search)"
+      },
+      {
+        "command": "github1s.open-gitpod",
+        "title": "Edit files in Gitpod",
+        "category": "GitHub1s"
+      }
+    ],
+    "colors": [
+      {
+        "id": "gitDecoration.addedResourceForeground",
+        "description": "%colors.added%",
+        "defaults": {
+          "light": "#587c0c",
+          "dark": "#81b88b",
+          "highContrast": "#1b5225"
+        }
+      },
+      {
+        "id": "gitDecoration.deletedResourceForeground",
+        "description": "%colors.deleted%",
+        "defaults": {
+          "light": "#ad0707",
+          "dark": "#c74e39",
+          "highContrast": "#c74e39"
+        }
+      },
+      {
+        "id": "gitDecoration.modifiedResourceForeground",
+        "description": "%colors.modified%",
+        "defaults": {
+          "light": "#895503",
+          "dark": "#E2C08D",
+          "highContrast": "#E2C08D"
+        }
+      },
+      {
+        "id": "gitDecoration.submoduleResourceForeground",
+        "description": "%colors.submodule%",
+        "defaults": {
+          "light": "#1258a7",
+          "dark": "#8db9e2",
+          "highContrast": "#8db9e2"
+        }
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "github1s.switch-to-pull",
+          "when": "view =~ /^github1s\\.views\\.pull-request-list/",
+          "group": "navigation"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "clean": "rm -rf dist out",
+    "build": "webpack --config extension.webpack.config.js --mode production",
+    "compile": "webpack --config extension.webpack.config.js --mode production",
+    "dev": "webpack --config extension.webpack.config.js --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@apollo/client": "^3.3.9",
+    "dayjs": "^1.10.4",
+    "fuse.js": "^6.4.6",
+    "graphql": "^15.5.0",
+    "history": "^5.0.0",
+    "js-base64": "^3.6.0",
+    "json-stable-stringify": "^1.0.1",
+    "p-finally": "^2.0.1",
+    "webpack-cli": "^4.4.0"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.52.0",
+    "ts-loader": "^8.0.14",
+    "typescript": "^4.1.3",
+    "webpack": "^4.46.0"
+  }
+}
